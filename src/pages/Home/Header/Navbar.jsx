@@ -4,9 +4,10 @@ import { FaBars } from "react-icons/fa";
 import { FiPhoneCall } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 import image from "../../../assets/logo.png";
+import MegaMenu from "../MegaMenu/MegaMenu";
+
 const Navbar = () => {
   let Links = [
-    { name: "Home", link: "/" },
     { name: "Shop", link: "/shop" },
     { name: "Pages", link: "/pages" },
     { name: "Blog", link: "/blog" },
@@ -51,6 +52,8 @@ const Navbar = () => {
             open ? "top-20 bg-neutral-800 text-white" : "top-[-490px]"
           }`}
         >
+          <MegaMenu />
+
           {Links.map((link, i) => (
             <li key={i} className="md:mr-8 lg:my-0 my-7 font-medium">
               <NavLink
@@ -60,7 +63,7 @@ const Navbar = () => {
                   isPending
                     ? "pending"
                     : isActive
-                    ? " border-b-[2px] text-white  border-b-[#00B207] font-semibold "
+                    ? " text-[#00B207] font-semibold "
                     : "text-[#999999]"
                 }
               >

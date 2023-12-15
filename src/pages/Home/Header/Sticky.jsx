@@ -12,11 +12,11 @@ const Sticky = () => {
         <Language />
         <MoneyRent />
         <div className="flex text-sm justify-center items-center">
-          <Link>
+          <Link to={"/sign-in"}>
             <h2 className="mr-1">Sign In</h2>
           </Link>
           /
-          <Link>
+          <Link to={"/sign-up"}>
             <h2 className="ml-1">Sign Up</h2>
           </Link>
         </div>
