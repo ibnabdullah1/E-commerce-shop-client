@@ -112,7 +112,7 @@ const MegaMenu = () => {
           }`}
         >
           {navigationMenu === "getting-started" && (
-            <div className="w-[400px] relative p-6 left-[100px] bg-[rgba(251,251,251)]">
+            <div className="w-[400px] relative p-6 left-[100px] rounded bg-[rgba(251,251,251)]">
               <ul className="grid grid-cols-2">
                 <li
                   onClick={() => navigationMenuClose()}

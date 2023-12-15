@@ -1,11 +1,25 @@
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import Rating from "react-rating";
 import "./ProductCard.css";
+import { useState } from "react";
+import ProductCardModal from "./ProductCardModal";
 const ProductCard = ({ img, title, price, rating }) => {
   const handleAddToCart = (img, title, price, rating) => {
     const addedProduct = { img, title, price, rating };
     console.log(addedProduct);
   };
+
+  const items = { img, title, price, rating };
+
+  let [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
 
   return (
     <div className="card border-[1px] pt-10 pb-3 rounded-xl">
@@ -57,12 +71,17 @@ const ProductCard = ({ img, title, price, rating }) => {
         </div>
         <div>
           <button
-            onClick={() => handleAddToCart(img, title, price, rating)}
+            onClick={() => openModal(true)}
             className=" bg-gray-100 text-xl p-2 rounded-full hover:bg-[#00B207] "
           >
             <HiOutlineShoppingBag />
           </button>
         </div>
+        <ProductCardModal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          items={items}
+        />
       </div>
     </div>
   );
