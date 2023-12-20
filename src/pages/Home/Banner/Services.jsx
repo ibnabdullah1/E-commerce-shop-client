@@ -5,7 +5,7 @@ import { BsBoxSeam } from "react-icons/bs";
 
 const Services = () => {
   return (
-    <div className="flex justify-center items-center gap-5 max-w-5xl mx-auto bg-white relative -top-16 rounded-lg py-7 shadow-sm">
+    <div className="hidden md:flex justify-center items-center gap-5 max-w-5xl mx-auto bg-white relative -top-16 rounded-lg py-7 shadow-sm">
       <div className="flex items-center gap-2">
         <TbTruckDelivery className="text-3xl text-[#00B207]" />
         <div>

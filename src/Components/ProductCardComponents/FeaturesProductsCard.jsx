@@ -1,15 +1,16 @@
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import Rating from "react-rating";
-import "./ProductCard.css";
-import { useState } from "react";
 import ProductCardModal from "./ProductCardModal";
-const ProductCard = ({ img, title, price, rating, product }) => {
+import { useState } from "react";
+
+const FeaturesProductsCard = ({ product }) => {
+  console.log(product);
   const handleAddToCart = (img, title, price, rating) => {
     const addedProduct = { img, title, price, rating };
     console.log(addedProduct);
   };
 
-  const items = { img, title, price, rating };
+  //   const items = { img, title, price, rating };
 
   let [isOpen, setIsOpen] = useState(false);
 
@@ -22,22 +23,22 @@ const ProductCard = ({ img, title, price, rating, product }) => {
   }
 
   return (
-    <div className="card border-[1px] pt-10 pb-3 rounded-xl">
-      <div className="flex justify-center  w-full items-center px-3">
+    <div className="grid grid-cols-3 mb-3 py-3 pr-1 border-[1px]  rounded-xl">
+      <div className="col-span-1 flex  items-center px-3">
         <img
           className="overflow-hidden 
-          h-[200px] object-cover"
-          src={img || product.image}
+          h-[70px] object-cover"
+          src={product.image}
           alt=""
         />
       </div>
-      <div className="flex justify-between items-center px-3">
+      <div className="col-span-2">
         <div>
           <h3 className="text-sm font-medium mt-2 text-gray-600">
-            {title || product.food_name}
+            {product.food_name}
           </h3>
           <h4 className="text-base font-semibold  text-gray-800">
-            Price: ${price || product.price}
+            Price: ${product.price}
           </h4>
           <p className=" text-orange-400 text-xs ">
             <Rating
@@ -71,7 +72,7 @@ const ProductCard = ({ img, title, price, rating, product }) => {
                   />
                 </svg>
               }
-              initialRating={rating || product.rating}
+              initialRating={product.rating}
               readonly
             />
           </p>
@@ -79,7 +80,7 @@ const ProductCard = ({ img, title, price, rating, product }) => {
         <div>
           <button
             onClick={() => openModal(true)}
-            className=" bg-gray-100 text-xl p-2 rounded-full hover:bg-[#00B207] "
+            className=" bg-gray-100 hidden text-xl p-2 rounded-full hover:bg-[#00B207] "
           >
             <HiOutlineShoppingBag />
           </button>
@@ -87,7 +88,7 @@ const ProductCard = ({ img, title, price, rating, product }) => {
         <ProductCardModal
           isOpen={isOpen}
           closeModal={closeModal}
-          items={items}
+          //   items={items}
           product={product}
         />
       </div>
@@ -95,4 +96,4 @@ const ProductCard = ({ img, title, price, rating, product }) => {
   );
 };
 
-export default ProductCard;
+export default FeaturesProductsCard;

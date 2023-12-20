@@ -1,6 +1,8 @@
 import image from "../../../assets/logo.png";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { GoHeart } from "react-icons/go";
+import { ShoppingCart } from "../../../Components/ShoppingCart/ShoppingCart";
+import { NavLink } from "react-router-dom";
 
 const SearchFunc = () => {
   return (
@@ -27,10 +29,12 @@ const SearchFunc = () => {
         </form>
       </div>
       <div className="flex items-center">
-        <GoHeart className="text-4xl" />{" "}
+        <NavLink to={"/cart"}>
+          <GoHeart className="text-4xl" />
+        </NavLink>
         <div className="w-[2px] h-6 bg-[#CCCCCC] mx-2"></div>
         <div className="flex items-center">
-          <HiOutlineShoppingBag className="text-4xl" />
+          <ShoppingCart />
           <div>
             <h3>Shopping cart:</h3>
             <p>$57.00</p>

@@ -3,8 +3,10 @@ import { PiGoogleLogoBold } from "react-icons/pi";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LinkBanner from "../../Components/LinkBanner/LinkBanner";
+import axios from "axios";
+import useAuth from "../../Hooks/useAuth";
 const SignIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -13,14 +15,27 @@ const SignIn = () => {
   const [passwordError, setPasswordError] = useState("");
   const from = location?.state?.from?.pathname || "/";
 
+  const { signIn } = useAuth();
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    const passwordConfirmation = form.confirm_password.value;
-    console.log(email, password, passwordConfirmation);
+    const user = { email, password };
+    signIn(email, password)
+      .then(() => {
+        toast.success("User Log in successfully");
+        navigate("/");
+        setLoading(false);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+        setLoading(false);
+      });
+    axios
+      .put("http://localhost:3000/users", user)
+      .then((data) => console.log(data.data));
   };
 
   return (
@@ -95,12 +110,11 @@ const SignIn = () => {
                 type="submit"
                 className="bg-[#00B207] w-full rounded-md transform font-semibold duration-100 hover:bg-[rgb(0,178,7,0.8)] py-3 text-white"
               >
-                Continue
-                {/* {loading ? (
-                <TbFidgetSpinner className="animate-spin m-auto" />
-              ) : (
-                "Continue"
-              )} */}
+                {loading ? (
+                  <TbFidgetSpinner className="animate-spin m-auto" />
+                ) : (
+                  "Continue"
+                )}
               </button>
             </div>
           </form>

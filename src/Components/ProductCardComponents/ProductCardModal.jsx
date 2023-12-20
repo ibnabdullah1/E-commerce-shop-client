@@ -6,15 +6,15 @@ import {
   FaPinterestP,
   FaTwitter,
 } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
 import { CiHeart } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import Rating from "react-rating";
 import brandImg from "../../assets/brand.png";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
-const ProductCardModal = ({ closeModal, items, isOpen }) => {
+const ProductCardModal = ({ closeModal, items, isOpen, product }) => {
   const [itemQuantity, setItemQuantity] = useState(0);
-  console.log(items);
   const handleQuantityUp = () => {
     setItemQuantity(itemQuantity + 1);
   };
@@ -25,7 +25,7 @@ const ProductCardModal = ({ closeModal, items, isOpen }) => {
     }
   };
 
-  const totalPrice = items.price * itemQuantity;
+  const totalPrice = (items?.price || product?.price) * itemQuantity;
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -54,14 +54,21 @@ const ProductCardModal = ({ closeModal, items, isOpen }) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <div className="flex justify-between items-start ">
-                  <div className="flex-1 items-center flex justify-center">
-                    <img className="w-[300px]" src={items.img} alt="" />
+                <button onClick={closeModal}>
+                  <RxCross2 className="text-3xl text-gray-500" />
+                </button>
+                <div className="md:flex justify-between items-start ">
+                  <div className="flex-1  items-center flex justify-center">
+                    <img
+                      className="h-[300px] w-auto"
+                      src={items?.img || product?.image}
+                      alt=""
+                    />
                   </div>
                   <div className="text-left  flex-1">
                     <h2 className="text-2xl my-2 font-semibold flex items-center gap-2">
-                      {items.title}{" "}
-                      <span className="py-1 px-2.5 border-none rounded bg-[#d2f0d4] text-sm text-[#2C742F] font-medium">
+                      {items?.title || product?.food_name}{" "}
+                      <span className="py-1 px-2.5 w-20 border-none rounded bg-[#d2f0d4] text-sm text-[#2C742F] font-medium">
                         In Stock
                       </span>
                     </h2>
@@ -98,14 +105,18 @@ const ProductCardModal = ({ closeModal, items, isOpen }) => {
                             />
                           </svg>
                         }
-                        initialRating={items.rating}
+                        initialRating={items?.rating || product?.rating}
                         readonly
                       />
-                      <span className="text-[#666666]"> 4 Review</span>
+                      <span className="text-[#666666]">
+                        {product?.review
+                          ? product?.review + " Review"
+                          : "4 Review"}{" "}
+                      </span>
                       <span className="text-[#202020]">SKU: 2,51,594</span>
                     </p>
                     <p className="text-[#2C742F] font-semibold flex gap-1 items-center my-1 ">
-                      ${items.price}
+                      ${items?.price || product?.price}
                       <span className="py-1 px-2.5 border-none rounded-full bg-[#fdeded] text-xs text-[#EA4B48] font-medium">
                         60% off
                       </span>
@@ -120,7 +131,9 @@ const ProductCardModal = ({ closeModal, items, isOpen }) => {
                         <p>Brand:</p>
                         <div className="border rounded px-2 py-1 flex flex-col items-center justify-center">
                           <img className="w-6" src={brandImg} alt="" />
-                          <p className="text-xs">farmary</p>
+                          <p className="text-xs">
+                            {product?.brand ? product?.brand : "farmary"}
+                          </p>
                         </div>
                       </div>
 
@@ -141,10 +154,9 @@ const ProductCardModal = ({ closeModal, items, isOpen }) => {
                       </div>
                     </div>
                     <p>
-                      Class aptent taciti sociosqu ad litora torquent per
-                      conubia nostra, per inceptos himenaeos. Nulla nibh diam,
-                      blandit vel consequat nec, ultrices et ipsum. Nulla varius
-                      magna a consequat pulvinar.{" "}
+                      {product?.details
+                        ? product?.details
+                        : "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam,blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar."}
                     </p>
                     <div className="flex my-3 justify-between items-center">
                       <div className="border max-w-[100px] flex px-2 rounded-full gap-2 py-2 items-center justify-between">
@@ -160,20 +172,34 @@ const ProductCardModal = ({ closeModal, items, isOpen }) => {
                         Add to Cart
                         <HiOutlineShoppingBag />
                       </button>
-                      <button className="bg-[#d2f0d4] p-3 text-[#2C742F] rounded-full">
+                      <button className="bg-[#d2f0d4] p-3 hover:text-white hover:bg-[#00B207] text-[#2C742F] rounded-full">
                         <CiHeart />
                       </button>
                     </div>
                     <div className="my-3">
                       <p className=" text-sm">
                         Category:{" "}
-                        <span className="text-[#808080]">Vegetables</span>
-                      </p>
-                      <p className=" text-sm">
-                        Tag:{" "}
                         <span className="text-[#808080]">
-                          Vegetables Healthy Chinese Cabbage Green{" "}
+                          {product?.category ? product?.category : "Vegetables"}
                         </span>
+                      </p>
+                      <p className="text-sm">
+                        Tag:{" "}
+                        {product?.tags ? (
+                          product?.tags.map((tag, index) => (
+                            <span
+                              key={index}
+                              className="text-[#808080] mr-2 "
+                              style={{ textTransform: "capitalize" }}
+                            >
+                              {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="text-[#808080]">
+                            Vegetables Healthy Chinese Cabbage Green
+                          </span>
+                        )}
                       </p>
                     </div>
                   </div>

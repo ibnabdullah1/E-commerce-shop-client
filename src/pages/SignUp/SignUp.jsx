@@ -6,10 +6,10 @@ import { TbFidgetSpinner } from "react-icons/tb";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import LinkBanner from "../../Components/LinkBanner/LinkBanner";
+import axios from "axios";
 const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log({ location });
   const [showPassword, setShowPassword] = useState(false);
   const [confirmShowPassword, setConfirmShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -42,6 +42,10 @@ const SignUp = () => {
           setLoading(false);
         });
     }
+    const user = { email, password };
+    axios
+      .put("http://localhost:3000/users", user)
+      .then((data) => console.log(data));
   };
 
   const validatePassword = (password, passwordConfirmation) => {

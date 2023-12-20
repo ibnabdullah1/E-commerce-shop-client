@@ -23,7 +23,7 @@ const Navbar = () => {
           <img src={image} alt="" />
           <h2 className="text-2xl text-white font-bold">EcoBazar</h2>
         </div>
-        <div className="flex lg:hidden">
+        <div className="md:flex hidden">
           <form className="flex flex-col md:flex-row gap-3">
             <div className="flex">
               <input
@@ -52,7 +52,7 @@ const Navbar = () => {
             open ? "top-20 bg-neutral-800 text-white" : "top-[-490px]"
           }`}
         >
-          <MegaMenu />
+          <MegaMenu setOpen={setOpen} />
 
           {Links.map((link, i) => (
             <li key={i} className="md:mr-8 lg:my-0 my-7 font-medium">

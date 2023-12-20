@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 
-const MegaMenu = () => {
+const MegaMenu = ({ setOpen }) => {
   const [navigationMenuOpen, setNavigationMenuOpen] = useState(false);
   const [navigationMenu, setNavigationMenu] = useState("");
   const navigationMenuCloseTimeout = useRef(null);
@@ -78,9 +78,9 @@ const MegaMenu = () => {
     <div>
       <nav className="relative z-10 w-auto">
         <div className="relative">
-          <ul className="flex items-center justify-center flex-1 p-1 space-x-1 list-none text-neutral-700 group border-neutral-200/80">
+          <ul className="md:flex items-center flex-1  space-x-1 list-none text-neutral-700 group border-neutral-200/80">
             <li
-              className="md:mr-8 lg:my-0 my-7 font-medium"
+              className="md:mr-8 lg:my-0 mt-7 md:my-7 font-medium"
               onMouseOver={handleMouseOver}
               onMouseLeave={handleMouseLeave}
               data-menu="getting-started"
@@ -91,13 +91,13 @@ const MegaMenu = () => {
                   isPending
                     ? "pending"
                     : isActive
-                    ? "text-[#00B207] flex justify-center items-center font-semibold "
-                    : "text-[#999999] flex justify-center items-center"
+                    ? "text-[#00B207] flex md:justify-center justify-between items-center font-semibold "
+                    : "text-[#999999] flex md:justify-center justify-between items-center"
                 }
               >
                 Home
                 {navigationMenuOpen && navigationMenu === "getting-started" ? (
-                  <IoIosArrowUp />
+                  <IoIosArrowUp onClick={() => navigationMenuClose()} />
                 ) : (
                   <IoIosArrowDown />
                 )}
@@ -112,13 +112,14 @@ const MegaMenu = () => {
           }`}
         >
           {navigationMenu === "getting-started" && (
-            <div className="w-[400px] relative p-6 left-[100px] rounded bg-[rgba(251,251,251)]">
-              <ul className="grid grid-cols-2">
+            <div className="w-[400px] relative p-6 bg-opacity-90 md:left-[100px] rounded bg-[#242222]">
+              <ul className="grid grid-cols-1 md:grid-cols-2">
                 <li
                   onClick={() => navigationMenuClose()}
                   className="block px-3.5 py-3 text-sm rounded hover:bg-gray-100"
                 >
                   <NavLink
+                    onClick={() => setOpen(!open)}
                     to={"/sign-up"}
                     className={({ isActive, isPending }) =>
                       isPending
@@ -136,6 +137,7 @@ const MegaMenu = () => {
                   className="block px-3.5 py-3 text-sm rounded hover:bg-gray-200"
                 >
                   <NavLink
+                    onClick={() => setOpen(!open)}
                     to={"categories"}
                     className={({ isActive, isPending }) =>
                       isPending
@@ -153,6 +155,7 @@ const MegaMenu = () => {
                   className="block px-3.5 py-3 text-sm rounded hover:bg-gray-200"
                 >
                   <NavLink
+                    onClick={() => setOpen(!open)}
                     to={"/account"}
                     className={({ isActive, isPending }) =>
                       isPending
@@ -170,6 +173,7 @@ const MegaMenu = () => {
                   className="block px-3.5 py-3 text-sm rounded hover:bg-gray-200"
                 >
                   <NavLink
+                    onClick={() => setOpen(!open)}
                     to={"/dashboard"}
                     className={({ isActive, isPending }) =>
                       isPending
