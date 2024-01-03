@@ -2,6 +2,9 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import Rating from "react-rating";
 import ProductCardModal from "./ProductCardModal";
 import { useState } from "react";
+import "./FeaturesProductsCard.css";
+import { CiHeart } from "react-icons/ci";
+import { FiEye } from "react-icons/fi";
 
 const FeaturesProductsCard = ({ product }) => {
   console.log(product);
@@ -23,7 +26,7 @@ const FeaturesProductsCard = ({ product }) => {
   }
 
   return (
-    <div className="grid grid-cols-3 mb-3 py-3 pr-1 border-[1px]  rounded-xl">
+    <div className=" featuresCard grid card grid-cols-3  mb-3 py-3 pr-1 border-[1px]  rounded-xl">
       <div className="col-span-1 flex  items-center px-3">
         <img
           className="overflow-hidden 
@@ -34,10 +37,10 @@ const FeaturesProductsCard = ({ product }) => {
       </div>
       <div className="col-span-2">
         <div>
-          <h3 className="text-sm font-medium mt-2 text-gray-600">
+          <h3 className="text-xs font-medium mt-2 text-gray-600">
             {product.food_name}
           </h3>
-          <h4 className="text-base font-semibold  text-gray-800">
+          <h4 className="text-sm font-semibold  text-gray-800">
             Price: ${product.price}
           </h4>
           <p className=" text-orange-400 text-xs ">
@@ -49,7 +52,7 @@ const FeaturesProductsCard = ({ product }) => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-4 h-4"
+                  className="w-3 h-3"
                 >
                   <path
                     strokeLinecap="round"
@@ -63,7 +66,7 @@ const FeaturesProductsCard = ({ product }) => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="w-4 h-4"
+                  className="w-3 h-3"
                 >
                   <path
                     fillRule="evenodd"
@@ -78,12 +81,20 @@ const FeaturesProductsCard = ({ product }) => {
           </p>
         </div>
         <div>
-          <button
-            onClick={() => openModal(true)}
-            className=" bg-gray-100 hidden text-xl p-2 rounded-full hover:bg-[#00B207] "
-          >
-            <HiOutlineShoppingBag />
-          </button>
+          <div className="flex gap-2 mt-2">
+            <button
+              onClick={() => openModal(true)}
+              className=" bg-gray-100 hidden text-xl p-2 rounded-full hover:bg-[#00B207] "
+            >
+              <HiOutlineShoppingBag />
+            </button>
+            <button className=" bg-gray-100 hidden text-xl p-2 rounded-full hover:bg-[#00B207] ">
+              <FiEye />
+            </button>
+            <button className=" bg-gray-100 hidden text-xl p-2 rounded-full hover:bg-[#00B207] ">
+              <CiHeart />
+            </button>
+          </div>
         </div>
         <ProductCardModal
           isOpen={isOpen}

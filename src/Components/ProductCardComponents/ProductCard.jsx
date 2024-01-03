@@ -3,6 +3,8 @@ import Rating from "react-rating";
 import "./ProductCard.css";
 import { useState } from "react";
 import ProductCardModal from "./ProductCardModal";
+import { FiEye } from "react-icons/fi";
+import { CiHeart } from "react-icons/ci";
 const ProductCard = ({ img, title, price, rating, product }) => {
   const handleAddToCart = (img, title, price, rating) => {
     const addedProduct = { img, title, price, rating };
@@ -22,11 +24,11 @@ const ProductCard = ({ img, title, price, rating, product }) => {
   }
 
   return (
-    <div className="card border-[1px] pt-10 pb-3 rounded-xl">
-      <div className="flex justify-center  w-full items-center px-3">
+    <div className=" relative card border-[1px] pt-10 pb-3 rounded-xl">
+      <div className="flex justify-center  w-full items-center ">
         <img
           className="overflow-hidden 
-          h-[200px] object-cover"
+          h-[200px] object-cover object-center"
           src={img || product.image}
           alt=""
         />
@@ -79,7 +81,7 @@ const ProductCard = ({ img, title, price, rating, product }) => {
         <div>
           <button
             onClick={() => openModal(true)}
-            className=" bg-gray-100 text-xl p-2 rounded-full hover:bg-[#00B207] "
+            className=" bg-gray-100 btn1 text-xl p-2 rounded-full hover:bg-[#00B207] "
           >
             <HiOutlineShoppingBag />
           </button>
@@ -90,6 +92,14 @@ const ProductCard = ({ img, title, price, rating, product }) => {
           items={items}
           product={product}
         />
+      </div>
+      <div>
+        <button className=" top-3 btn2 right-2 absolute bg-white  hover:text-white border text-xl p-2 rounded-full hover:bg-[#00B207] ">
+          <FiEye />
+        </button>
+        <button className="absolute btn3 top-14 right-2 bg-white border  hover:text-white text-xl p-2 rounded-full hover:bg-[#00B207] ">
+          <CiHeart />
+        </button>
       </div>
     </div>
   );

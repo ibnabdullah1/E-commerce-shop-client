@@ -11,6 +11,7 @@ import AllProducts from "../AllProducts/AllProducts";
 import React, { useState } from "react";
 import { RxChevronUp } from "react-icons/rx";
 import { RxChevronDown } from "react-icons/rx";
+import LinkBanner from "../LinkBanner/LinkBanner";
 
 const Categories = () => {
   const [categoryItem, setCategoryItem] = useState([]);
@@ -45,6 +46,8 @@ const Categories = () => {
 
   return (
     <div>
+      <LinkBanner location={"All Categories"} />
+
       <div className="grid lg:grid-cols-7 max-w-5xl gap-5 mx-auto my-20 ">
         <div className="md:flex flex-col lg:col-span-2 px-5">
           {/* {categories.map((category, i) => (
@@ -74,7 +77,7 @@ const Categories = () => {
               )}
             </button>
             <AccordionBody className="lg:flex flex-wrap lg:flex-col">
-              {categories.map((category, i) => (
+              {categories?.map((category, i) => (
                 <Checkbox
                   onClick={() => handleCategories(category.category)}
                   color={

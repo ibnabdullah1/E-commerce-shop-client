@@ -1,5 +1,4 @@
 import image from "../../../assets/logo.png";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { GoHeart } from "react-icons/go";
 import { ShoppingCart } from "../../../Components/ShoppingCart/ShoppingCart";
 import { NavLink } from "react-router-dom";
@@ -33,11 +32,16 @@ const SearchFunc = () => {
           <GoHeart className="text-4xl" />
         </NavLink>
         <div className="w-[2px] h-6 bg-[#CCCCCC] mx-2"></div>
-        <div className="flex items-center">
-          <ShoppingCart />
+        <div className="flex gap-2 items-center">
+          <div className="relative">
+            <ShoppingCart />
+            <span className="w-5 h-5 border-[2px] border-white flex justify-center items-center rounded-full absolute top-0 right-0 text-xs bg-[#2C742F] text-white">
+              0
+            </span>
+          </div>
           <div>
             <h3>Shopping cart:</h3>
-            <p>$57.00</p>
+            <p className="font-semibold">$00.00</p>
           </div>
         </div>
       </div>
